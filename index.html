@@ -1,6 +1,13 @@
 <!doctype html>
 <html>
 <head>
+    <style>
+        p{
+            width: 50vw;
+        }
+    </style>
+    
+    
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,48 +15,58 @@
 </head>
 
 <body>
-    <article>
-        <h1 style="text-align: center; font-size: 500%;">Coupling and Cohesion</h1>
+    
+    <h1 style="text-align: center; font-size: 500%;">Coupling and Cohesion</h1>
 
+
+    <div style="float: right;">
+        <iframe width="300"  src="https://www.youtube.com/embed/Df0WVO-c3Sw&autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    
+    <h2 style="text-align: left; font-size: 200%;"><a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)">Coupling</a></h2>
+            
+        <p style="text-align: left;">
+            Coupling is the measure of the degree of interdependence between the modules. A good software will have low coupling. 
+        </p>
+
+
+    <h3 style="text-align: left; font-size: 100%;">Coupling between modules can arise for different reasons, some of which are more acceptable, or desirable, than others. A ranked list [from least desirable to most desirable] might look something like the following:</h3>
+        <ul>
+            <li>Internal data coupling [one module modifying the internals of another]</li>
+            <li>Global data coupling [modules sharing global data]</li>
+            <li>Control or sequence coupling [one module controlling the sequence of events in another]</li>
+            <li>Parameter coupling [one module passing information to another through parameters]</li>
+            <li>Subclass coupling [one module inheriting from another]</li>
+        </ul>
         
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Coupling_sketches_cropped_1.svg/2560px-Coupling_sketches_cropped_1.svg.png" alt="image cohesion - coupling" width="500" height="350">
+    <p>
+        
+    </p>
 
-            <h2 style="text-align: left; font-size: 200%;"><a href="https://en.wikipedia.org/wiki/Coupling_(computer_programming)">Coupling</a></h2>
-            
-            <p style="width: 600px; text-align: left;">
-                Coupling is the measure of the degree of interdependence between the modules. A good software will have low coupling. 
-            </p>
-            
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Coupling_sketches_cropped_1.svg/2560px-Coupling_sketches_cropped_1.svg.png" alt="image coupling" width="500" height="350">
 
-            <h3 style="text-align: left; font-size: 100%;">Coupling between modules can arise for different reasons, some of which are more acceptable, or desirable, than others. A ranked list [from least desirable to most desirable] might look something like the following:</h3>
-                <ul>
-                    <li>Internal data coupling [one module modifying the internals of another]</li>
-                    <li>Global data coupling [modules sharing global data]</li>
-                    <li>Control or sequence coupling [one module controlling the sequence of events in another]</li>
-                    <li>Parameter coupling [one module passing information to another through parameters]</li>
-                    <li>Subclass coupling [one module inheriting from another]</li>
 
-                </ul>
-            <hr>
-            
-            
-            
-            <h2 style="text-align: left; font-size: 200%;"><a href="https://en.wikipedia.org/wiki/Cohesion_(computer_science)">Cohesion</a></h2>
-            <p style="width: 600px; text-align: left;">
-            Cohesion is a measure of the degree to which the elements of the module are functionally related. It is the degree to which all elements directed towards performing a single task are contained in the component. Basically, cohesion is the internal glue that keeps the module together. A good software design will have high cohesion. 
-            
-            <h3 style="text-align: left; font-size: 100%;">As with coupling, cohesion can be ranked on a scale of the weakest (least desirable) to the strongest (most desirable) as follows:</h3>
-                <ul>
-                    <li>Coincidental cohesion [elements are in the same module for no particular reason]</li>
-                    <li>Logical cohesion [elements perform logically related tasks]</li>
-                    <li>Temporal cohesion [elements must be used at approximately the same time]</li>
-                    <li>Communication cohesion [elements share I/O]</li>
-                    <li>Sequential cohesion [elements must be used in a particular order]</li>
-                    <li>Functional cohesion [elements cooperate to carry out a single function]</li>
-                    <li>Data cohesion [elements cooperate to present an interface to a hidden data structure]</li>
 
-                </ul>
-            <hr>
+    <h2 style="text-align: left; font-size: 200%;"><a href="https://en.wikipedia.org/wiki/Cohesion_(computer_science)">Cohesion</a></h2>
+        <p style="width: 600px; text-align: left;">
+        Cohesion is a measure of the degree to which the elements of the module are functionally related. It is the degree to which all elements directed towards performing a single task are contained in the component. Basically, cohesion is the internal glue that keeps the module together. A good software design will have high cohesion. 
 
+
+    <h2 style="text-align: left; font-size: 100%;">As with coupling, cohesion can be ranked on a scale of the weakest (least desirable) to the strongest (most desirable) as follows:</h2>
+        <ul>
+            <li>Coincidental cohesion [elements are in the same module for no particular reason]</li>
+            <li>Logical cohesion [elements perform logically related tasks]</li>
+            <li>Temporal cohesion [elements must be used at approximately the same time]</li>
+            <li>Communication cohesion [elements share I/O]</li>
+            <li>Sequential cohesion [elements must be used in a particular order]</li>
+            <li>Functional cohesion [elements cooperate to carry out a single function]</li>
+            <li>Data cohesion [elements cooperate to present an interface to a hidden data structure]</li>
+        </ul>
+
+
+    <img src="https://miro.medium.com/max/1400/1*gNosm5_i6lqxz-HN5nGqwg.png" alt="image cohesion" width="500" height="350">
+
+    
+    
 </body>
 </html>
