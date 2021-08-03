@@ -1,0 +1,61 @@
+.dropbtn {
+    background-color: inherit; /*#4CAF50;*/
+    color: inherit;
+    font-size: 14px;
+    border: none;
+    font-family: inherit;
+    font-weight: inherit;
+    padding: 0 0 3px 0;
+    margin: inherity;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--red); /*#f1f1f1;*/
+    min-width: 130px;
+    min-height: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 2px 0 2px 0;
+    text-decoration: none;
+    display: block;
+}
+
+#menu-bar-2 .dropbtn { /* More White */
+    position: relative;
+    top: 10px;
+    padding-left: 5px;  
+}
+
+#menu-bar-2 .dropdown-content a:hover {
+    background-color: var(--red); /* #ddd; */
+    border: none;
+    color: white;
+    text-decoration: underline;
+}
+
+#topbar .dropdown-content a:hover { /* More black */
+    background-color: var(--red);   /* #ddd; */
+    border: none;
+    color: white;
+    text-decoration: underline;
+    padding: 2px 0 2px 0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Selects all elements with .dropbtn that is a descendant of an element with .dropdown:hover */
+.dropdown:hover .dropbtn {
+    border-bottom: 6px solid var(--underline_topbar);
+}
