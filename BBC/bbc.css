@@ -1,4 +1,4 @@
-/*
+    /*
         Create a global variable.
         https://www.w3schools.com/css/css3_variables.asp
     */
@@ -310,7 +310,7 @@
     
     h3 a {
         color: black;
-        font-size: 30px;
+        font-size: 20px;
         text-decoration: none;
     }
     
@@ -320,7 +320,7 @@
     
     #article-summary {
         color: #5a5a5a;
-        width: 100%;
+        width: 30%;
         float: left;
     }
     
@@ -348,14 +348,16 @@
     
     #article-container {
         float: left;
-        width: 43%;
+        width: 55%;
         border-right: 0px solid var(--lightgray);
         padding-right: 10px;
     }
     
+    
     #main-article-image {
-        width:100%;
+        width:70%;
         margin-left:0px;
+        float: right;
     }
     
     #article-hr {
@@ -371,10 +373,10 @@
     #watch-listen {
         margin-left: 0px;
         margin-top: -30px;
-        width: 55%;
+        width: 43%;
         float: right;
     }
-    
+
     h4 {
         font-weight: normal;
         font-size: 20px;
@@ -382,7 +384,14 @@
     
     .article-side-image {
         float:left;
-        height:150px;
+        height:180px;
+        margin-right:20px;
+        margin-bottom:0px;
+    }
+
+    .article-under-image {
+        float:left;
+        height:157px;
         margin-right:20px;
         margin-bottom:0px;
     }
