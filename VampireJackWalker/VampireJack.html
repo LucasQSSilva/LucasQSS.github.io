@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet" crossorigin="anonymous">
+  <title>Jack Walker</title>
+  <style>
+    body {
+      background-color: #F8F8F8;
+      font-family: 'bold Roboto';
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <img id="jack" src="img/player_big.png" width='480' hidden> 
+  <canvas id="JackCanvas" width="400" height="250" style="background: url('./img/sky.jpg'); background-size: 400px 250px;"></canvas>
+  <p>Jack travelled <span id="px">---</span> pixels, and turned <span id="turn">---</span> times, so far.</p>
+  <p>Jack's speed is <span id="speed">---</span> and lap time is <spam id="time"> 0s </spam></p>
+  <p>Spacebar pause/resume Jack's strolling, so he can rest a little bit.</p>
+  <p>Arrows make Jack speed up, slow down or jump.</p>
+  <p>G/g increase/decrease Jack's gravity.</p>
+  <p>FPS: <spam id="fpsCounter">---</spam></p>
+
+  <script src="./jack.js"> </script>
+</body>
+</html>
