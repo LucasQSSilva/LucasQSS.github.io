@@ -41,7 +41,7 @@
  *  @author Marijn Haverbeke ({@link https://marijnhaverbeke.nl}), adapted to ES6 by Paulo Roma
  *  @since 06/07/2021
  */
-var roads = [
+ var roads = [
   "Alice's House-Bob's House",   "Alice's House-Cabin",
   "Alice's House-Post Office",   "Bob's House-Town Hall",
   "Daria's House-Ernie's House", "Daria's House-Town Hall",
@@ -442,7 +442,7 @@ let findShortestPath = (graph, startNode, endNode) => {
   //this is the shortest path
   let results = {
    distance: distances[endNode],
-   path: shortestPath,
+   route: shortestPath,
   };
   // return the shortest path & the end node's distance from the start node
     return results;
@@ -540,34 +540,14 @@ export function lazyRobot({place, parcels}, route) {
 
 
 
-
-
-
-
-
-
-
 export function dijkstraRobot({place, parcels}, route) {
-  let selectedParcel = parcels[0];
-  let {selectedDistance, selectedPath} = findShortestPath(roadGraph, place, selectedParcel.place);
   parcels.forEach(parcel => {
     let {currentDistance, currentPath} = findShortestPath(roadGraph, place, parcel.place);
-    if (currentDistance < selectedDistance){
-      selectedParcel = parcel;
-      selectedDistance = currentDistance;
-      selectedPath = currentPath;
-      console.log(selectedPath);
-    }
+    console.log(currentDistance);
+    route.concat(selectedPath);
   })
-
-  route = selectedPath;
-  return{direction: route[0], memory: route.slice(1)};
+  return {direction: route[0], memory: route.slice(1)};
 }
-
-
-
-
-
 
 
 
