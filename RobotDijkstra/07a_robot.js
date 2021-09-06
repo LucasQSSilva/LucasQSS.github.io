@@ -556,6 +556,7 @@ export function dijkstraRobot({place, parcels}, route) {
       selectedParcel = parcel;
       selectedDistance = currentDistance;
       selectedPath = currentPath;
+      console.log(selectedPath);
     }
   })
 
