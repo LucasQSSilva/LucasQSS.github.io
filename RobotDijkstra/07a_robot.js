@@ -544,7 +544,7 @@ export function dijkstraRobot({place, parcels}, route) {
   parcels.forEach(parcel => {
     let {currentDistance, currentPath} = findShortestPath(roadGraph, place, parcel.place);
     console.log(currentDistance);
-    route.concat(selectedPath);
+    route.concat(currentPath);
   })
   return {direction: route[0], memory: route.slice(1)};
 }
