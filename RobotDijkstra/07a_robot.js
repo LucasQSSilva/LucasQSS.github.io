@@ -388,6 +388,7 @@ let findShortestPath = (graph, startNode, endNode) => {
   distances[endNode] = "Infinity";
   distances = Object.assign(distances, graph[startNode]);
  // track paths using a hash object
+ console.log("distancias = ", distances);
   let parents = { endNode: null };
   for (let child in graph[startNode]) {
    parents[child] = startNode;
@@ -397,7 +398,8 @@ let findShortestPath = (graph, startNode, endNode) => {
     let visited = [];
  // find the nearest node
     let node = shortestDistanceNode(distances, visited);
-  
+    console.log("no mais proximo = ", node);
+
   // for that node:
   while (node) {
   // find its distance from the start node & its child nodes
@@ -439,7 +441,7 @@ let findShortestPath = (graph, startNode, endNode) => {
   }
  
   // return the shortest path
-    return shortestPath;
+    return shortestPath.reverse();
  };
 
 
