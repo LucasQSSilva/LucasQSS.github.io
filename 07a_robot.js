@@ -538,8 +538,9 @@ export function lazyRobot({place, parcels}, route) {
 
 
 export function dijkstraRobot({place, parcels}, route) {
+  let currentDistance;
   parcels.forEach(parcel => {
-    currentDistance = findShortestPath(roadGraph, place, parcel.place)[route];
+    currentDistance = findShortestPath(roadGraph, place, parcel.place);
     console.log(currentDistance);
     route.concat(currentDistance);
   })
