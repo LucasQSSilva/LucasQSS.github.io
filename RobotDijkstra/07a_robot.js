@@ -440,11 +440,13 @@ let findShortestPath = (graph, startNode, endNode) => {
   shortestPath.reverse();
    
   //this is the shortest path
-  let results = shortestPath;
+  let results = {
+   distance: distances[endNode],
+   path: shortestPath,
+  };
   // return the shortest path & the end node's distance from the start node
     return results;
  };
-
 
 
 /**
@@ -546,19 +548,19 @@ export function lazyRobot({place, parcels}, route) {
 
 
 export function dijkstraRobot({place, parcels}, route) {
-  if (route.length == 0) {
-    // Describe a route for every parcel
-    let routes = parcels.map(parcel => {
-      if (parcel.place != place) {
-        return {route: findShortestPath(roadGraph, place, parcel.place),
-                pickUp: true};
-      } else {
-        return {route: findShortestPath(roadGraph, place, parcel.address),
-                pickUp: false};
-      }
-    });
-  return {direction: route[0], memory: route.slice(1)};
+  let selectedParcel = parcels[0];
+  let {selectedDistance, selectedPath} = findShortestPath(roadGraph, place, selectedParcel.place);
+  for (parcel in parcels){
+    let {currentDistance, currentPath} = findShortestPath(roadGraph, place, parcel.place);
+    if (currentDistance < selectedDistance){
+      selectedParcel = parcel;
+      selectedDistance = currentDistance;
+      selectedPath = currentPath;
+    }
   }
+  
+  route = selectedPath;
+  return{direction: route[0], memory: route.slice(1)};
 }
 
 
@@ -613,12 +615,3 @@ export function maxNode (nodes) {
   return [keys.reduce((a, b) => nodes[a].in > nodes[b].in ? a : b),
           keys.reduce((a, b) => nodes[a].out > nodes[b].out ? a : b)];
 }
-
-let graph = {
-	start: { A: 5, B: 2 },
-	A: { start: 1, C: 4, D: 2 },
-	B: { A: 8, D: 7 },
-	C: { D: 6, finish: 3 },
-	D: { finish: 1 },
-	finish: {},
-};
