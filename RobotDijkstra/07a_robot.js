@@ -440,10 +440,7 @@ let findShortestPath = (graph, startNode, endNode) => {
   shortestPath.reverse();
    
   //this is the shortest path
-  let results = {
-   distance: distances[endNode],
-   route: shortestPath,
-  };
+  let results = shortestPath;
   // return the shortest path & the end node's distance from the start node
     return results;
  };
@@ -542,9 +539,9 @@ export function lazyRobot({place, parcels}, route) {
 
 export function dijkstraRobot({place, parcels}, route) {
   parcels.forEach(parcel => {
-    let {currentDistance, currentPath} = findShortestPath(roadGraph, place, parcel.place);
+    currentDistance = findShortestPath(roadGraph, place, parcel.place)[route];
     console.log(currentDistance);
-    route.concat(currentPath);
+    route.concat(currentDistance);
   })
   return {direction: route[0], memory: route.slice(1)};
 }
