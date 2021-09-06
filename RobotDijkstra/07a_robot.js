@@ -557,15 +557,8 @@ export function dijkstraRobot({place, parcels}, route) {
                 pickUp: false};
       }
     });
-    // This determines the precedence a route gets when choosing.
-    // Route length counts negatively, routes that pick up a package
-    // get a small bonus.
-    function score({route, pickUp}) {
-      return (pickUp ? 0.5 : 0) - route.length;
-    }
-    route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
-  }
   return {direction: route[0], memory: route.slice(1)};
+  }
 }
 
 
@@ -620,3 +613,12 @@ export function maxNode (nodes) {
   return [keys.reduce((a, b) => nodes[a].in > nodes[b].in ? a : b),
           keys.reduce((a, b) => nodes[a].out > nodes[b].out ? a : b)];
 }
+
+let graph = {
+	start: { A: 5, B: 2 },
+	A: { start: 1, C: 4, D: 2 },
+	B: { A: 8, D: 7 },
+	C: { D: 6, finish: 3 },
+	D: { finish: 1 },
+	finish: {},
+};
