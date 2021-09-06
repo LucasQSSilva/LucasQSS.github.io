@@ -550,15 +550,15 @@ export function lazyRobot({place, parcels}, route) {
 export function dijkstraRobot({place, parcels}, route) {
   let selectedParcel = parcels[0];
   let {selectedDistance, selectedPath} = findShortestPath(roadGraph, place, selectedParcel.place);
-  for (parcel in parcels){
+  parcels.forEach(parcel => {
     let {currentDistance, currentPath} = findShortestPath(roadGraph, place, parcel.place);
     if (currentDistance < selectedDistance){
       selectedParcel = parcel;
       selectedDistance = currentDistance;
       selectedPath = currentPath;
     }
-  }
-  
+  })
+
   route = selectedPath;
   return{direction: route[0], memory: route.slice(1)};
 }
