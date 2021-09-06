@@ -542,9 +542,11 @@ export function dijkstraRobot({place, parcels}, route) {
     // Describe a route for every parcel
     let routes = parcels.map(parcel => {
       if (parcel.place != place) {
+        console.log("nao estou no place", findShortestPath(roadGraph, place, parcel.place));
         return {route: findShortestPath(roadGraph, place, parcel.place),
                 pickUp: true};
       } else {
+        console.log("estou no place", findShortestPath(roadGraph, place, parcel.place));
         return {route: findShortestPath(roadGraph, place, parcel.address),
                 pickUp: false};
       }
