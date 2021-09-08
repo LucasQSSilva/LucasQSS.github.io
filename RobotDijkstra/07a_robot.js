@@ -444,12 +444,12 @@ export function lazyRobot({place, parcels}, route) {
 
 
 
-// Collects all parcels that go to some destination
+// Checks if all parcels of a given destination have already been collected
 function allParcelsCollected(place, parcel, parcels){
   let allCollected = false;
   parcels.forEach(element => {
     console.log("Testing parcel at:" + parcel.place);
-      if (element.place!=place && element.place!=parcel.place){
+      if (element.place!=place && element.address!=parcel.address){
           allCollected = true;
         }
   });
@@ -468,29 +468,28 @@ export function dijkstraRobot({place, parcels}, route) {
 
       if (parcel.place != place) {
         console.log("Robot at :" + place + "  Parcel at : " + parcel.place);
-
-        if (allParcelsCollected(place, parcel, parcels)==true){
-
-          return {route: findRoute(roadGraph, place, parcel.address),
-            pickUp: true}; 
-        }
-
-        else{ 
-
-          return {route: findRoute(roadGraph, place, parcel.place),
+        return {route: findRoute(roadGraph, place, parcel.place),
                   pickUp: true};
+      }
+      
+      else {
+        // If the collected parcel is the last of its kind, deliver it
+        if (allParcelsCollected(place, parcel, parcels)==true){
+          return {route: findRoute(roadGraph, place, parcel.address),
+                  pickUp: true}; 
         }
-      } else {
 
+        else{
           return {route: findRoute(roadGraph, place, parcel.address),
                   pickUp: false};
+        }
       }
     });
     // This determines the precedence a route gets when choosing.
     // Route length counts negatively, routes that pick up a package
     // get a small bonus.
     function score({route, pickUp}) {
-      return (pickUp ? 1 : 0) + 1 / route.length;
+      return (pickUp ? 1 : 0) - route.length;
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
