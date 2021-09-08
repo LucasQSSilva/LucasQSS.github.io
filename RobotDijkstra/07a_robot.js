@@ -650,7 +650,7 @@ function calculatedRoute(place, parcels){
     graphBFSDeliver.push(element.address);
   });
   generatedRoute.push(currentPlace);
-  while(vertices.length() > 0){
+  while(vertices.length > 0){
     currentPlace = getClosestVertex(currentPlace, vertices);
     vertices = vertices.filter(element => element != currentPlace);
     generatedRoute.push(currentPlace);
