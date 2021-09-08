@@ -645,7 +645,6 @@ export function precalculatedDijkstra({place, parcels}, route) {
   parcels.forEach(parcel => {
     if(!allParcelsCollected(place, parcel, parcels)){
       selector = 0;
-      break;
     }
   });
 
