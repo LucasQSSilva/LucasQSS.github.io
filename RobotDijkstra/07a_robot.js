@@ -629,7 +629,7 @@ function getClosestVertex(place,parcels){
   parcels.forEach(element => {
     let route = [];
     route = findShortestPath(roadsWithDistances, place, element);
-    if(route.length() < min){
+    if(route.length < min){
       selected = element;
       min = route.length();
     }
