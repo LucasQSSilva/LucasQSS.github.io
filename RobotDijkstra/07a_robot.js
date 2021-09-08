@@ -640,7 +640,7 @@ function getClosestVertex(place,parcels){
 
 
 function calculatedRoute(place, parcels){
-  var generatedRoute;
+  var generatedRoute=[];
   let vertices = [];
   let currentPlace;
   let graphBFSDeliver = [];
