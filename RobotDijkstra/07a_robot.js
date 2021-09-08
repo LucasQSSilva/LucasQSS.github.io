@@ -634,6 +634,7 @@ function getClosestVertex(place,parcels){
       min = route.length;
     }
   });
+  console.log("selected = " + selected);
   return selected;
 }
 
@@ -669,6 +670,7 @@ export function precalculatedDijkstra({place, parcels}, route) {
   if(selector==0){
     route = calculatedRoute(place, parcels);
     console.log("GeneratedRoute = ", route);
+    selector = selector + 1;
     return {direction: route[0], memory: route.slice(1)};
   }
   else{
