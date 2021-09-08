@@ -448,13 +448,13 @@ export function lazyRobot({place, parcels}, route) {
 function allParcelsCollected(place, parcel, parcels){
   let allCollected = false;
   parcels.forEach(element => {
-    console.log(element.place);
-    console.log(place);
-    console.log(parcel.place);
+    console.log("Testing parcel at:" + parcel.place);
       if (element.place!=place && element.place!=parcel.place){
           allCollected = true;
-      }
+        }
   });
+  console.log("All collected :" + allCollected);
+
 
   return allCollected;
 }
@@ -490,7 +490,7 @@ export function dijkstraRobot({place, parcels}, route) {
     // Route length counts negatively, routes that pick up a package
     // get a small bonus.
     function score({route, pickUp}) {
-      return (pickUp ? 0.5 : 0) - route.length;
+      return (pickUp ? 1 : 0) + 1 / route.length;
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
