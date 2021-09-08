@@ -643,7 +643,7 @@ function calculatedRoute(place, parcels){
   var generatedRoute;
   let vertices = [];
   let currentPlace;
-  let graphBFSDeliver;
+  let graphBFSDeliver = [];
   currentPlace = place;
   parcels.forEach(element => {
     vertices.push(element.place);
