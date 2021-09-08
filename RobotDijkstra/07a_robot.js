@@ -623,10 +623,10 @@ export function dijkstraRobot({place, parcels}, route) {
 
 
 
-function getClosestVertex(place,parcels){
+function getClosestVertex(place,vertices){
   let min = 99;
   let selected = "";
-  parcels.forEach(element => {
+  vertices.forEach(element => {
     let route = [];
     route = findShortestPath(roadsWithDistances, place, element);
     if(route.length < min){
@@ -638,56 +638,42 @@ function getClosestVertex(place,parcels){
   return selected;
 }
 
-
-var generatedRoute=[];
-function calculatedRoute(place, parcels){
-  let vertices = [];
-  let currentPlace;
-  let graphBFSDeliver = [];
-  let currentVertex;
-  currentPlace = place;
-  parcels.forEach(element => {
-    vertices.push(element.place);
-    graphBFSDeliver.push(element.address);
-  });
-  generatedRoute.push(currentPlace);
-  while(vertices.length > 0){
-    vertices = vertices.filter(element => element != currentPlace);
-    currentVertex = getClosestVertex(currentPlace, vertices);
-    currentPlace = currentVertex;
-    generatedRoute.push(currentPlace);
-    console.log("vertices = " + vertices);
-
-    graphBFSDeliver.forEach(element => {
-      if(element==currentPlace){
-        vertices.push(element);
-      }
-
-    });
-    console.log("graphBFSDeliver before = " + graphBFSDeliver);
-    graphBFSDeliver = graphBFSDeliver.filter(element => element != currentPlace);
-    console.log("graphBFSDeliver after = " + graphBFSDeliver);
-
-  }
-  return generatedRoute.slice(1);
-}
-
-var selector = 0;
 export function precalculatedDijkstra({place, parcels}, route) {
+  let selector = 1;
+  let destinations = [];
+  let closest;
+  parcels.forEach(parcel => {
+    if(!allParcelsCollected(place, parcel, parcels)){
+      selector = 0;
+      break;
+    }
+  });
+
   if(selector==0){
-    route = calculatedRoute(place, parcels);
-    console.log("GeneratedRoute = ", route);
-    selector = selector + 1;
-    return {direction: route[0], memory: route.slice(1)};
+    parcels.forEach(parcel => {
+      if(parcel.place != place && !(parcel.place in destinations)){
+        destinations.push(parcel.place);
+      }
+    });
+    
+    closest = getClosestVertex(place, destinations);
+    route = findShortestPath(roadsWithDistances, place, closest);
   }
   else{
-    generatedRoute = generatedRoute.slice(1);
-    route = generatedRoute;
-    console.log("GeneratedRoute else = ", route);
-
-    return {direction: route[0], memory: route.slice(2)};
+    parcels.forEach(parcel => {
+      if(parcel.address != place && !(parcel.address in destinations)){
+        destinations.push(parcel.address);
+      }
+    });
+    
+    closest = getClosestVertex(place, destinations);
+    route = findShortestPath(roadsWithDistances, place, closest);
   }
+  
+  console.log("route = " + route);
+  return {direction: route[0], memory: route.slice};
 }
+
 
 
 
