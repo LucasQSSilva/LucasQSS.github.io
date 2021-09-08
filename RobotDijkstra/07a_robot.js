@@ -581,7 +581,7 @@ export function dijkstraRobot({place, parcels}, route) {
     let routes = parcels.map(parcel => {
 
       if (parcel.place != place) {
-        console.log("Robot at :" + place + "  Parcel at : " + parcel.place);
+        //console.log("Robot at :" + place + "  Parcel at : " + parcel.place);
         return {route: findShortestPath(roadsWithDistances, place, parcel.place),
                   pickUp: true};
       }
