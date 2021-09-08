@@ -445,8 +445,6 @@ export function lazyRobot({place, parcels}, route) {
 
 
 
-parcel.
-
 
 
 function allParcelsCollected(place, parcel, parcels){
@@ -466,16 +464,24 @@ export function dijkstraRobot({place, parcels}, route) {
   if (route.length == 0) {
     // Describe a route for every parcel
     let routes = parcels.map(parcel => {
+
       if (parcel.place != place) {
-        if allCollected(place, parcel, parcels){
+
+        if (allParcelsCollected(place, parcel, parcels)==true){
+
           return {route: findRoute(roadGraph, place, parcel.address),
             pickUp: true}; 
         }
-        return {route: findRoute(roadGraph, place, parcel.place),
-                pickUp: true};
+
+        else{ 
+
+          return {route: findRoute(roadGraph, place, parcel.place),
+                  pickUp: true};
+        }
       } else {
-        return {route: findRoute(roadGraph, place, parcel.address),
-                pickUp: false};
+
+          return {route: findRoute(roadGraph, place, parcel.address),
+                  pickUp: false};
       }
     });
     // This determines the precedence a route gets when choosing.
