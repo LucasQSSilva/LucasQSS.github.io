@@ -551,7 +551,7 @@ let findShortestPath = (graph, startNode, endNode) => {
    shortestPath.push(parent);
    parent = parents[parent];
   }
-  return shortestPath.reverse();
+  return shortestPath.reverse().slice(1);
  };
 
 
