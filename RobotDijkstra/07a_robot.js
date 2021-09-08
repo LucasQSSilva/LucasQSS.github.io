@@ -623,6 +623,65 @@ export function dijkstraRobot({place, parcels}, route) {
 
 
 
+function getClosestVertex(place,parcels){
+  let min = 99;
+  let selected = "";
+  parcels.forEach(element => {
+    let route = [];
+    route = findShortestPath(roadsWithDistances, place, element);
+    if(route.length() < min){
+      selected = element;
+      min = route.length();
+    }
+  });
+  return selected;
+}
+
+
+function makeRoute(){
+  var createdRoute = 0;
+  var generatedRoute = [];
+  function calculatedRoute(place, parcels){
+    if (createdRoute == 0){
+      vertices = []
+      currentPlace = place;
+      parcels.forEach(element => {
+        vertices.push[element.place];
+        graphBFSDeliver[element.address] = false;
+      });
+      generatedRoute.push(currentPlace);
+      while(vertices.length() > 0){
+        currentPlace = getClosestVertex(currentPlace, vertices);
+        vertices = vertices.filter(element => element != currentPlace);
+        generatedRoute.push(currentPlace);
+        graphBFSDeliver.forEach(element => {
+          if(element==currentPlace){
+            graphBFSDeliver[element]=true;
+            vertices.push(element);
+          }
+        });
+        graphBFSDeliver = graphBFSDeliver.filter(element => element != currentPlace);
+      }
+      return generatedRoute;
+    }
+
+    else{
+      return generatedRoute.splice(1);
+    }
+  }
+}
+var dijskstraRoute = makeRoute();
+
+export function dijkstraRobot2({place, parcels}, route) {
+  route = dijskstraRoute.calculatedRoute(place, parcels).splice(1);
+  console.log("generatedRoute: " + route);
+  return {direction: route[0], memory: route.slice(1)};
+}
+
+
+
+
+
 
 
 
