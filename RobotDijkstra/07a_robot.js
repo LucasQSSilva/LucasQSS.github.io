@@ -558,22 +558,6 @@ let findShortestPath = (graph, startNode, endNode) => {
 
 
 
-// Checks if all parcels of a given destination have already been collected
-function allParcelsCollected(place, parcel, parcels){
-  let allCollected = false;
-  parcels.forEach(element => {
-    console.log("Testing parcel at:" + parcel.place);
-      if (element.place!=place && element.address!=parcel.address){
-          allCollected = true;
-        }
-  });
-  console.log("All collected :" + allCollected);
-
-
-  return allCollected;
-}
-
-
 
 export function dijkstraRobot({place, parcels}, route) {
   if (route.length == 0) {
@@ -585,23 +569,13 @@ export function dijkstraRobot({place, parcels}, route) {
         return {route: findShortestPath(roadsWithDistances, place, parcel.place),
                   pickUp: true};
       }
-      /*
-      else {
-        
-        // If the collected parcel is the last of its kind, deliver it
-        if (allParcelsCollected(place, parcel, parcels)==true){
-          return {route: findShortestPath(roadsWithDistances, place, parcel.address),
-                  pickUp: true}; 
-        }
-        */
+
 
         else{
           return {route: findShortestPath(roadsWithDistances, place, parcel.address),
                   pickUp: false};
         }
-        /*
-      }
-      */
+
     });
     // This determines the precedence a route gets when choosing.
     // Route length counts negatively, routes that pick up a package
@@ -638,12 +612,12 @@ function getClosestVertex(place,vertices){
   return selected;
 }
 
-export function precalculatedDijkstra({place, parcels}, route) {
+export function Collect_and_Deliver_DJKST({place, parcels}, route) {
   let selector = 1;
   let destinations = [];
   let closest;
   parcels.forEach(parcel => {
-    if(!allParcelsCollected(place, parcel, parcels)){
+    if(parcel.place!=place){
       selector = 0;
     }
   });

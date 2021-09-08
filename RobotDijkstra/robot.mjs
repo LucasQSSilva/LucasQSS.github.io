@@ -17,7 +17,7 @@ import * as robot from "./07a_robot.js"
 
 console.log(robot.roadGraph);
 
-var rtypes = [robot.randomRobot, robot.routeRobot, robot.goalOrientedRobot, robot.lazyRobot, robot.dijkstraRobot, robot.precalculatedDijkstra];
+var rtypes = [robot.randomRobot, robot.routeRobot, robot.goalOrientedRobot, robot.lazyRobot, robot.dijkstraRobot, robot.Collect_and_Deliver_DJKST];
 
 var nparcels, type, argv = (process.argv);
 if (argv.length > 2) {
