@@ -631,7 +631,7 @@ function getClosestVertex(place,parcels){
     route = findShortestPath(roadsWithDistances, place, element);
     if(route.length < min){
       selected = element;
-      min = route.length();
+      min = route.length;
     }
   });
   return selected;
