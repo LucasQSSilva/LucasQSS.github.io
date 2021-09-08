@@ -435,9 +435,7 @@ export function lazyRobot({place, parcels}, route) {
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
-  console.log(route);
-  console.log(route[0]);
-  console.log(route.slice(1));
+
   
   return {direction: route[0], memory: route.slice(1)};
 }
@@ -446,11 +444,14 @@ export function lazyRobot({place, parcels}, route) {
 
 
 
-
+// Collects all parcels that go to some destination
 function allParcelsCollected(place, parcel, parcels){
   let allCollected = false;
   parcels.forEach(element => {
-      if (element.place!=place &&  element.place!=parcel.place){
+    console.log(element.place);
+    console.log(place);
+    console.log(parcel.place);
+      if (element.place!=place && element.place!=parcel.place){
           allCollected = true;
       }
   });
