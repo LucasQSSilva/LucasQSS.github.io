@@ -414,6 +414,7 @@ export function goalOrientedRobot({place, parcels}, route) {
  * @see https://levelup.gitconnected.com/finding-the-shortest-path-in-javascript-dijkstras-algorithm-8d16451eea34
  * @see https://medium.com/@jpena91/dijkstras-algorithm-finding-the-shortest-path-in-javascript-a7247afe93b2
  */
+
 export function lazyRobot({place, parcels}, route) {
   if (route.length == 0) {
     // Describe a route for every parcel
@@ -444,31 +445,36 @@ export function lazyRobot({place, parcels}, route) {
 
 
 
+parcel.
 
 
 
+function allParcelsCollected(place, parcel, parcels){
+  let allCollected = false;
+  parcels.forEach(element => {
+      if (element.place!=place &&  element.place!=parcel.place){
+          allCollected = true;
+      }
+  });
 
-
+  return allCollected;
+}
 
 
 
 export function dijkstraRobot({place, parcels}, route) {
   if (route.length == 0) {
-    console.log("Estou em", place);
-    console.log("Grafo = ", roadGraph);
-    
-
     // Describe a route for every parcel
     let routes = parcels.map(parcel => {
       if (parcel.place != place) {
-        console.log("estou indo para", parcel.place);
-        console.log("nao estou no place", dijkstra(roadGraph, place));
-        return {route: dijkstra(roadGraph, place, parcel.place),
+        if allCollected(place, parcel, parcels){
+          return {route: findRoute(roadGraph, place, parcel.address),
+            pickUp: true}; 
+        }
+        return {route: findRoute(roadGraph, place, parcel.place),
                 pickUp: true};
       } else {
-        console.log("estou indo para", parcel.address);
-        console.log("estou no place", dijkstra(roadGraph, place));
-        return {route: dijkstra(roadGraph, place, parcel.address),
+        return {route: findRoute(roadGraph, place, parcel.address),
                 pickUp: false};
       }
     });
@@ -480,6 +486,10 @@ export function dijkstraRobot({place, parcels}, route) {
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
+  console.log(route);
+  console.log(route[0]);
+  console.log(route.slice(1));
+  
   return {direction: route[0], memory: route.slice(1)};
 }
 
