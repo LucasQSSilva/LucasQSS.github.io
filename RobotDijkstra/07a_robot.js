@@ -467,6 +467,7 @@ export function dijkstraRobot({place, parcels}, route) {
     let routes = parcels.map(parcel => {
 
       if (parcel.place != place) {
+        console.log("Robot at :" + place + "  Parcel at : " + parcel.place);
 
         if (allParcelsCollected(place, parcel, parcels)==true){
 
@@ -493,9 +494,7 @@ export function dijkstraRobot({place, parcels}, route) {
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
-  console.log(route);
-  console.log(route[0]);
-  console.log(route.slice(1));
+
   
   return {direction: route[0], memory: route.slice(1)};
 }
