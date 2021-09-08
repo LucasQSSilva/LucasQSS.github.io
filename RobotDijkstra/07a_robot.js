@@ -652,10 +652,10 @@ function calculatedRoute(place, parcels){
   });
   generatedRoute.push(currentPlace);
   while(vertices.length > 0){
+    vertices = vertices.filter(element => element != currentPlace);
     currentVertex = getClosestVertex(currentPlace, vertices);
     currentPlace = currentVertex;
     generatedRoute.push(currentPlace);
-    vertices = vertices.filter(element => element != currentPlace);
     console.log("vertices = " + vertices);
 
     graphBFSDeliver.forEach(element => {
