@@ -444,6 +444,120 @@ export function lazyRobot({place, parcels}, route) {
 
 
 
+
+
+
+let roadsWithDistances = {
+  "Alice's House": {"Bob's House": 1, 'Cabin': 1, 'Post Office':1},
+  "Bob's House": {"Alice's House": 1, 'Town Hall':1},
+  'Cabin': {"Alice's House": 1},
+  "Daria's House": {"Ernie's House": 1, 'Town Hall': 1},
+  "Ernie's House": {"Daria's House": 1, "Grete's House": 1},
+  'Farm': {"Grete's House": 1, 'Marketplace': 1},
+  "Grete's House": {"Ernie's House": 1, 'Farm': 1, 'Shop': 1},
+  'Marketplace': {'Farm': 1, 'Post Office': 1, 'Shop': 1, 'Town Hall': 1},
+  'Post Office': {"Alice's House": 1, 'Marketplace': 1},
+  'Shop': {"Grete's House": 1, 'Marketplace': 1, 'Town Hall': 1},
+  'Town Hall': {"Bob's House": 1, "Daria's House": 1, 'Marketplace': 1, 'Shop': 1}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+let shortestDistanceNode = (distances, visited) => {
+  // create a default value for shortest
+	let shortest = null;
+	
+  	// for each node in the distances object
+	for (let node in distances) {
+    	// if no node has been assigned to shortest yet
+  		// or if the current node's distance is smaller than the current shortest
+		let currentIsShortest =
+			shortest === null || distances[node] < distances[shortest];
+        	
+	  	// and if the current node is in the unvisited set
+		if (currentIsShortest && !visited.includes(node)) {
+            // update shortest to be the current node
+			shortest = node;
+		}
+	}
+	return shortest;
+};
+
+
+
+
+let findShortestPath = (graph, startNode, endNode) => {
+ 
+  // track distances from the start node using a hash object
+    let distances = {};
+  distances[endNode] = "Infinity";
+  distances = Object.assign(distances, graph[startNode]);
+ // track paths using a hash object
+  let parents = { endNode: null };
+  for (let child in graph[startNode]) {
+   parents[child] = startNode;
+  }
+   
+  // collect visited nodes
+    let visited = [];
+ // find the nearest node
+    let node = shortestDistanceNode(distances, visited);
+  
+  // for that node:
+  while (node) {
+  // find its distance from the start node & its child nodes
+   let distance = distances[node];
+   let children = graph[node]; 
+       
+  // for each of those child nodes:
+       for (let child in children) {
+   
+   // make sure each child node is not the start node
+         if (String(child) === String(startNode)) {
+           continue;
+        } else {
+           // save the distance from the start node to the child node
+           let newdistance = distance + children[child];
+ // if there's no recorded distance from the start node to the child node in the distances object
+ // or if the recorded distance is shorter than the previously stored distance from the start node to the child node
+           if (!distances[child] || distances[child] > newdistance) {
+ // save the distance to the object
+      distances[child] = newdistance;
+ // record the path
+      parents[child] = node;
+     } 
+          }
+        }  
+       // move the current node to the visited set
+       visited.push(node);
+ // move to the nearest neighbor node
+       node = shortestDistanceNode(distances, visited);
+     }
+   
+  // using the stored paths from start node to end node
+  // record the shortest path
+  let shortestPath = [endNode];
+  let parent = parents[endNode];
+  while (parent) {
+   shortestPath.push(parent);
+   parent = parents[parent];
+  }
+  return shortestPath.reverse();
+ };
+
+
+
+
+
 // Checks if all parcels of a given destination have already been collected
 function allParcelsCollected(place, parcel, parcels){
   let allCollected = false;
@@ -468,19 +582,19 @@ export function dijkstraRobot({place, parcels}, route) {
 
       if (parcel.place != place) {
         console.log("Robot at :" + place + "  Parcel at : " + parcel.place);
-        return {route: findRoute(roadGraph, place, parcel.place),
+        return {route: findShortestPath(roadGraph, place, parcel.place),
                   pickUp: true};
       }
       
       else {
         // If the collected parcel is the last of its kind, deliver it
         if (allParcelsCollected(place, parcel, parcels)==true){
-          return {route: findRoute(roadGraph, place, parcel.address),
+          return {route: findShortestPath(roadGraph, place, parcel.address),
                   pickUp: true}; 
         }
 
         else{
-          return {route: findRoute(roadGraph, place, parcel.address),
+          return {route: findShortestPath(roadGraph, place, parcel.address),
                   pickUp: false};
         }
       }
@@ -489,7 +603,7 @@ export function dijkstraRobot({place, parcels}, route) {
     // Route length counts negatively, routes that pick up a package
     // get a small bonus.
     function score({route, pickUp}) {
-      return (pickUp ? 1 : 0) - route.length;
+      return (pickUp ? 0.3 : 0) - route.length;
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
