@@ -489,7 +489,7 @@ export function dijkstraRobot({place, parcels}, route) {
     // Route length counts negatively, routes that pick up a package
     // get a small bonus.
     function score({route, pickUp}) {
-      return (pickUp ? 1 : 0) - route.length;
+      return (pickUp ? 0.3 : 0) - route.length;
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
