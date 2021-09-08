@@ -646,8 +646,8 @@ function calculatedRoute(place, parcels){
   let graphBFSDeliver;
   currentPlace = place;
   parcels.forEach(element => {
-    vertices.push[element.place];
-    graphBFSDeliver[element.address] = false;
+    vertices.push(element.place);
+    graphBFSDeliver.push(element.address);
   });
   generatedRoute.push(currentPlace);
   while(vertices.length() > 0){
@@ -656,7 +656,6 @@ function calculatedRoute(place, parcels){
     generatedRoute.push(currentPlace);
     graphBFSDeliver.forEach(element => {
       if(element==currentPlace){
-        graphBFSDeliver[element]=true;
         vertices.push(element);
       }
     });
