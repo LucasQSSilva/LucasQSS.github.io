@@ -582,19 +582,19 @@ export function dijkstraRobot({place, parcels}, route) {
 
       if (parcel.place != place) {
         console.log("Robot at :" + place + "  Parcel at : " + parcel.place);
-        return {route: findShortestPath(roadGraph, place, parcel.place),
+        return {route: findShortestPath(roadsWithDistances, place, parcel.place),
                   pickUp: true};
       }
       
       else {
         // If the collected parcel is the last of its kind, deliver it
         if (allParcelsCollected(place, parcel, parcels)==true){
-          return {route: findShortestPath(roadGraph, place, parcel.address),
+          return {route: findShortestPath(roadsWithDistances, place, parcel.address),
                   pickUp: true}; 
         }
 
         else{
-          return {route: findShortestPath(roadGraph, place, parcel.address),
+          return {route: findShortestPath(roadsWithDistances, place, parcel.address),
                   pickUp: false};
         }
       }
