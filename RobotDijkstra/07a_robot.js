@@ -354,97 +354,6 @@ function findRoute(graph, from, to) {
 
 
 
-
-
-
-
-
-let shortestDistanceNode = (distances, visited) => {
-  // create a default value for shortest
-	let shortest = null;
-	
-  	// for each node in the distances object
-	for (let node in distances) {
-    	// if no node has been assigned to shortest yet
-  		// or if the current node's distance is smaller than the current shortest
-		let currentIsShortest =
-			shortest === null || distances[node] < distances[shortest];
-        	
-	  	// and if the current node is in the unvisited set
-		if (currentIsShortest && !visited.includes(node)) {
-            // update shortest to be the current node
-			shortest = node;
-		}
-	}
-	return shortest;
-};
-
-
-
-let findShortestPath = (graph, startNode, endNode) => {
- 
-  // track distances from the start node using a hash object
-    let distances = {};
-  distances[endNode] = 99;
-  distances = Object.assign(distances, graph[startNode]);
- // track paths using a hash object
- console.log("distancias = ", distances);
-  let parents = { endNode: null };
-  for (let child in graph[startNode]) {
-   parents[child] = startNode;
-  }
-   
-  // collect visited nodes
-    let visited = [];
- // find the nearest node
-    let node = shortestDistanceNode(distances, visited);
-    console.log("no mais proximo = ", node);
-
-  // for that node:
-  while (node) {
-  // find its distance from the start node & its child nodes
-   let distance = distances[node];
-   let children = graph[node]; 
-       
-  // for each of those child nodes:
-       for (let child in children) {
-   
-   // make sure each child node is not the start node
-         if (String(child) === String(startNode)) {
-           continue;
-        } else {
-           // save the distance from the start node to the child node
-           let newdistance = distance + children[child];
- // if there's no recorded distance from the start node to the child node in the distances object
- // or if the recorded distance is shorter than the previously stored distance from the start node to the child node
-           if (!distances[child] || distances[child] > newdistance) {
- // save the distance to the object
-      distances[child] = newdistance;
- // record the path
-      parents[child] = node;
-     } 
-          }
-        }  
-       // move the current node to the visited set
-       visited.push(node);
- // move to the nearest neighbor node
-       node = shortestDistanceNode(distances, visited);
-     }
-   
-  // using the stored paths from start node to end node
-  // record the shortest path
-  let shortestPath = [endNode];
-  let parent = parents[endNode];
-  while (parent) {
-   shortestPath.push(parent);
-   parent = parents[parent];
-  }
- 
-  // return the shortest path
-    return shortestPath.reverse();
- };
-
-
 /**
  * <p>This robot uses its memory value as a list of directions to move in, just like the route-following robot. <br>
  * Whenever that list is empty, it has to figure out what to do next. </p>
@@ -525,6 +434,10 @@ export function lazyRobot({place, parcels}, route) {
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
+  console.log(route);
+  console.log(route[0]);
+  console.log(route.slice(1));
+  
   return {direction: route[0], memory: route.slice(1)};
 }
 
@@ -537,118 +450,6 @@ export function lazyRobot({place, parcels}, route) {
 
 
 
-
-// A Javascript program for Dijkstra's single
-// source shortest path algorithm.
-// The program is for adjacency matrix
-// representation of the graph    
-let V = 9;
- 
-// A utility function to find the
-// vertex with minimum distance
-// value, from the set of vertices
-// not yet included in shortest
-// path tree
-function minDistance(dist,sptSet)
-{
-     
-    // Initialize min value
-    let min = Number.MAX_VALUE;
-    let min_index = -1;
-     
-    for(let v = 0; v < V; v++)
-    {
-        if (sptSet[v] == false && dist[v] <= min)
-        {
-            min = dist[v];
-            min_index = v;
-        }
-    }
-    return min_index;
-}
- 
-// A utility function to print
-// the constructed distance array
-function printSolution(dist)
-{
-    document.write("Vertex \t\t Distance from Source<br>");
-    for(let i = 0; i < V; i++)
-    {
-        document.write(i + " \t\t " +
-                 dist[i] + "<br>");
-    }
-}
- 
-// Function that implements Dijkstra's
-// single source shortest path algorithm
-// for a graph represented using adjacency
-// matrix representation
-function dijkstra(graph, src)
-{
-    let dist = new Array(V);
-    let sptSet = new Array(V);
-     
-    // Initialize all distances as
-    // INFINITE and stpSet[] as false
-    for(let i = 0; i < V; i++)
-    {
-        dist[i] = Number.MAX_VALUE;
-        sptSet[i] = false;
-    }
-     
-    // Distance of source vertex
-    // from itself is always 0
-    dist[src] = 0;
-     
-    // Find shortest path for all vertices
-    for(let count = 0; count < V - 1; count++)
-    {
-         
-        // Pick the minimum distance vertex
-        // from the set of vertices not yet
-        // processed. u is always equal to
-        // src in first iteration.
-        let u = minDistance(dist, sptSet);
-         
-        // Mark the picked vertex as processed
-        sptSet[u] = true;
-         
-        // Update dist value of the adjacent
-        // vertices of the picked vertex.
-        for(let v = 0; v < V; v++)
-        {
-             
-            // Update dist[v] only if is not in
-            // sptSet, there is an edge from u
-            // to v, and total weight of path
-            // from src to v through u is smaller
-            // than current value of dist[v]
-            if (!sptSet[v] && graph[u][v] != 0 &&
-                   dist[u] != Number.MAX_VALUE &&
-                   dist[u] + graph[u][v] < dist[v])
-            {
-                dist[v] = dist[u] + graph[u][v];
-            }
-        }
-    }
-     
-    // Print the constructed distance array
-    printSolution(dist);
-}
- 
-// Driver code
-let graph = [ [ 0, 4, 0, 0, 0, 0, 0, 8, 0 ],
-              [ 4, 0, 8, 0, 0, 0, 0, 11, 0 ],
-              [ 0, 8, 0, 7, 0, 4, 0, 0, 2 ],
-              [ 0, 0, 7, 0, 9, 14, 0, 0, 0],
-              [ 0, 0, 0, 9, 0, 10, 0, 0, 0 ],
-              [ 0, 0, 4, 14, 10, 0, 2, 0, 0],
-              [ 0, 0, 0, 0, 0, 2, 0, 1, 6 ],
-              [ 8, 11, 0, 0, 0, 0, 1, 0, 7 ],
-              [ 0, 0, 2, 0, 0, 0, 6, 7, 0 ] ]
-dijkstra(graph, 0);
- 
-// This code is contributed by rag2127
 
 
 export function dijkstraRobot({place, parcels}, route) {
