@@ -638,46 +638,46 @@ function getClosestVertex(place,parcels){
 }
 
 
-function makeRoute(){
-  var createdRoute = 0;
-  var generatedRoute = [];
-  function calculatedRoute(place, parcels){
-    if (createdRoute == 0){
-      vertices = []
-      currentPlace = place;
-      parcels.forEach(element => {
-        vertices.push[element.place];
-        graphBFSDeliver[element.address] = false;
-      });
-      generatedRoute.push(currentPlace);
-      while(vertices.length() > 0){
-        currentPlace = getClosestVertex(currentPlace, vertices);
-        vertices = vertices.filter(element => element != currentPlace);
-        generatedRoute.push(currentPlace);
-        graphBFSDeliver.forEach(element => {
-          if(element==currentPlace){
-            graphBFSDeliver[element]=true;
-            vertices.push(element);
-          }
-        });
-        graphBFSDeliver = graphBFSDeliver.filter(element => element != currentPlace);
-      }
-      return generatedRoute;
-    }
 
-    else{
-      return generatedRoute.splice(1);
-    }
+function calculatedRoute(place, parcels){
+  var generatedRoute;
+  let vertices = [];
+  currentPlace = place;
+  parcels.forEach(element => {
+    vertices.push[element.place];
+    graphBFSDeliver[element.address] = false;
+  });
+  generatedRoute.push(currentPlace);
+  while(vertices.length() > 0){
+    currentPlace = getClosestVertex(currentPlace, vertices);
+    vertices = vertices.filter(element => element != currentPlace);
+    generatedRoute.push(currentPlace);
+    graphBFSDeliver.forEach(element => {
+      if(element==currentPlace){
+        graphBFSDeliver[element]=true;
+        vertices.push(element);
+      }
+    });
+    graphBFSDeliver = graphBFSDeliver.filter(element => element != currentPlace);
+  }
+  return generatedRoute.slice(1);
+}
+
+var selector = 0;
+export function precalculatedDijkstra({place, parcels}, route) {
+  if(selector==0){
+    route = calculatedRoute(place, parcels);
+    console.log("GeneratedRoute = ", route);
+    return {direction: route[0], memory: route.slice(1)};
+  }
+  else{
+    generatedRoute = generatedRoute.slice(1);
+    route = generatedRoute;
+    console.log("GeneratedRoute else = ", route);
+
+    return {direction: route[0], memory: route.slice(1)};
   }
 }
-var dijskstraRoute = makeRoute();
-
-export function precalculatedDijkstra({place, parcels}, route) {
-  route = dijskstraRoute.calculatedRoute(place, parcels).splice(1);
-  console.log("generatedRoute: " + route);
-  return {direction: route[0], memory: route.slice(1)};
-}
-
 
 
 
