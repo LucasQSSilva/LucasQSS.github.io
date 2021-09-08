@@ -585,25 +585,29 @@ export function dijkstraRobot({place, parcels}, route) {
         return {route: findShortestPath(roadsWithDistances, place, parcel.place),
                   pickUp: true};
       }
-      
+      /*
       else {
+        
         // If the collected parcel is the last of its kind, deliver it
         if (allParcelsCollected(place, parcel, parcels)==true){
           return {route: findShortestPath(roadsWithDistances, place, parcel.address),
                   pickUp: true}; 
         }
+        */
 
         else{
           return {route: findShortestPath(roadsWithDistances, place, parcel.address),
                   pickUp: false};
         }
+        /*
       }
+      */
     });
     // This determines the precedence a route gets when choosing.
     // Route length counts negatively, routes that pick up a package
     // get a small bonus.
     function score({route, pickUp}) {
-      return (pickUp ? 0.3 : 0) - route.length;
+      return (pickUp ? 0.5 : 0) - route.length;
     }
     route = routes.reduce((a, b) => score(a) > score(b) ? a : b).route;
   }
