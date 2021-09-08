@@ -654,12 +654,18 @@ function calculatedRoute(place, parcels){
     currentPlace = getClosestVertex(currentPlace, vertices);
     generatedRoute.push(currentPlace);
     vertices = vertices.filter(element => element != currentPlace);
+    console.log("vertices = " + vertices);
+
     graphBFSDeliver.forEach(element => {
       if(element==currentPlace){
         vertices.push(element);
       }
+
     });
+    console.log("graphBFSDeliver before = " + graphBFSDeliver);
     graphBFSDeliver = graphBFSDeliver.filter(element => element != currentPlace);
+    console.log("graphBFSDeliver after = " + graphBFSDeliver);
+
   }
   return generatedRoute.slice(1);
 }
@@ -677,7 +683,7 @@ export function precalculatedDijkstra({place, parcels}, route) {
     route = generatedRoute;
     console.log("GeneratedRoute else = ", route);
 
-    return {direction: route[0], memory: route.slice(1)};
+    return {direction: route[0], memory: route.slice(2)};
   }
 }
 
