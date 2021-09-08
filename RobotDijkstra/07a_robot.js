@@ -672,7 +672,7 @@ function makeRoute(){
 }
 var dijskstraRoute = makeRoute();
 
-export function dijkstraRobot2({place, parcels}, route) {
+export function precalculatedDijkstra({place, parcels}, route) {
   route = dijskstraRoute.calculatedRoute(place, parcels).splice(1);
   console.log("generatedRoute: " + route);
   return {direction: route[0], memory: route.slice(1)};

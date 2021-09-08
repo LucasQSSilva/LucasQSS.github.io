@@ -37,7 +37,7 @@
 			<option value="2" selected="selected">Oriented</option>
 			<option value="3">Lazy</option>
 			<option value="4">Dijkstra</option>
-			<option value="4">Dijkstra2</option>
+			<option value="5">precalculatedDijkstra</option>
 		</select>
 		<label for="nparcels">#parcels:</label>
 		<select name="nparcels" id="nparcels" onchange="newTask(this)">
@@ -52,7 +52,7 @@
 		<button id="run" class="control" onclick="runRobotCode()">Run Robot</button>
 		<button id="task" class="control" onclick="location.reload()">New Task</button>
 		<script type="module">
-			import {roadGraph,VillageState,randomRobot,routeRobot,goalOrientedRobot,lazyRobot,dijkstraRobot, dijkstraRobot2, runRobot} from './07a_robot.js';
+			import {roadGraph,VillageState,randomRobot,routeRobot,goalOrientedRobot,lazyRobot,dijkstraRobot, precalculatedDijkstra, runRobot} from './07a_robot.js';
 			console.log(roadGraph);
 
 			// Module creates a scope to avoid name collisions.
@@ -62,7 +62,7 @@
 			window.newTask = newTask;
 
 			var task, anim = null;
-			var rtypes = [randomRobot, routeRobot, goalOrientedRobot, lazyRobot, dijkstraRobot, dijkstraRobot2];
+			var rtypes = [randomRobot, routeRobot, goalOrientedRobot, lazyRobot, dijkstraRobot, precalculatedDijkstra];
 
 			function newTask(selectedOption) {
 				// save the current selection in a cookie
