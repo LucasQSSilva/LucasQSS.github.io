@@ -639,9 +639,8 @@ function getClosestVertex(place,parcels){
 }
 
 
-
+var generatedRoute=[];
 function calculatedRoute(place, parcels){
-  var generatedRoute=[];
   let vertices = [];
   let currentPlace;
   let graphBFSDeliver = [];
@@ -653,8 +652,8 @@ function calculatedRoute(place, parcels){
   generatedRoute.push(currentPlace);
   while(vertices.length > 0){
     currentPlace = getClosestVertex(currentPlace, vertices);
-    vertices = vertices.filter(element => element != currentPlace);
     generatedRoute.push(currentPlace);
+    vertices = vertices.filter(element => element != currentPlace);
     graphBFSDeliver.forEach(element => {
       if(element==currentPlace){
         vertices.push(element);
