@@ -105,3 +105,9 @@ h1 {
   font-size: 0.95em;
   background-color: green;
 }
+
+.center {
+  border: 5px solid #FFFF00;
+  display: flex;
+  justify-content: center;
+  }
