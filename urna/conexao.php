@@ -18,22 +18,17 @@
     }
     echo "Connected successfully";
 
-    /**
-     * Iniciamos uma sessão para pegar os valores dos cookies
-     */
+    // Iniciamos uma sessão para pegar os valores dos cookies
     session_start();
 
-
-    /**
-     * Busca a chave do vereador e atualiza no banco o valor dos votos acumulados para aquele número (nulo se não for um número de candidato válido)
-     */
+    // Busca o valor na chave do vereador (armazena o numero do candidato que o eleitor digitou) e atualiza no banco o valor dos votos acumulados para aquele número (nulo se não for um número de candidato válido)
     if(isset($_COOKIE["vereador"])){
         $numero_voto = $_COOKIE["vereador"];
+        // A ideia aqui é buscar a quantidade de votos acumulados no banco, somar 1 e atualizar com o novo valor
         $query_busca = "SELECT VOTOS_ACUMULADOS FROM `vereador` WHERE NUMERO_URNA = $numero_voto";
         $resultado = $mysqli -> query($query_busca);
         $tourresult = $resultado->fetch_array()[0] ?? '';
         $tourresult += 1;
-        //echo "<br>Número de votos:".$tourresult;
         $query_insert = "UPDATE `vereador` SET VOTOS_ACUMULADOS=$tourresult WHERE NUMERO_URNA = $numero_voto";
         if(($atualiza = $mysqli -> query($query_insert))===TRUE){
             echo "<br>voto registrado";
@@ -43,16 +38,13 @@
         }
     }
 
-    /**
-     * Faz o mesmo acima, mas na tabela do prefeito
-     */
+    // Faz o mesmo acima, mas no registro de voto para prefeito
     if(isset($_COOKIE["prefeito"])){
         $numero_voto = $_COOKIE["prefeito"];
         $query_busca = "SELECT VOTOS_ACUMULADOS FROM `prefeito` WHERE NUMERO_URNA = $numero_voto";
         $resultado = $mysqli -> query($query_busca);
         $tourresult = $resultado->fetch_array()[0] ?? '';
         $tourresult += 1;
-        //echo "<br>Número de votos:".$tourresult;
         $query_insert = "UPDATE `prefeito` SET VOTOS_ACUMULADOS=$tourresult WHERE NUMERO_URNA = $numero_voto";
         if(($atualiza = $mysqli -> query($query_insert))===TRUE){
             echo "<br>voto registrado";
@@ -62,7 +54,7 @@
         }
     }
 
-    // Expira todos os cookies da página (deve ser o último a rodar)
+    // Expira todos os cookies da página para realizar a execução seguinte(mesmo considerando que estamos apenas atualizando valores de cookies para as mesmas chaves 'vereador' e 'prefeito')
     $past = time() - 3600;
     foreach ( $_COOKIE as $key => $value )
     {
