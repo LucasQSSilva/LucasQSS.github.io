@@ -10,7 +10,8 @@ A aplicação possui a seguinte divisão:
   
 2) Arquivos do back:
   - pasta Scripts, que contem o script de inicialização do banco
-  - conexao.php , que conecta ao banco criado na pasta scripts (usa o root default do phpmyadmin)
+  - conexao.php , que conecta ao banco criado na pasta scripts e atualiza a contagem de votos (usa o root default do phpmyadmin)
+  - consultaBanco.php, que busca os valores correntes do banco ao carregar a página e os exibe na tela
   
 3) Documentação:
   - pasta Doxygen_Docs, com a documentação gerada pelo doxygen para o conexao.php
