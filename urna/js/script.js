@@ -245,11 +245,6 @@ function confirmar() {
 }
 
 
-
-
-
-
-
 /**
  * Cópia da função "setCookie" vista em aula.<br>
  * Adiciona aos cookies da página o nome do cookie e seu valor.<br>
@@ -270,3 +265,18 @@ function setCookie(cname, cvalue, exdays) {
   console.log(document.cookie);
   // username=Paulo Roma; __utma=30314110.38272483.1627839402.1627839402.1627839402.1; __utmc=30314110; __utmz=30314110.1627839402.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)
 }
+
+/**
+ * Função com objetivo de exibir a consulta do banco no clique do botão. <br>
+ * Quando não está sendo exibido e o botão é clicado, passa a exibir o resultado da query. <br>
+ * Quando está sendo exibido e o botão é clicado novamente, some com os valores exibidos.
+ */
+function exibe_esconde_div() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
