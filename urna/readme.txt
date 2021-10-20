@@ -6,9 +6,9 @@ A aplicação possui a seguinte divisão:
   - pasta audio, que contem os sons reproduzidos
   - pasta js, com os arquivos em javascript
   - etapas.json, com os dados dos candidatos
-  - index.html , pagina da web
   
 2) Arquivos do back:
+  - index.php , nossa página da web
   - pasta Scripts, que contem o script de inicialização do banco
   - conexao.php , que conecta ao banco criado na pasta scripts e atualiza a contagem de votos (usa o root default do phpmyadmin)
   - consultaBanco.php, que busca os valores correntes do banco ao carregar a página e os exibe na tela
