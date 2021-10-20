@@ -101,7 +101,7 @@
 
   <!-- Os valores aqui são lidos do banco apenas no carregamento da página (diferente do conexao.php) -->
   <!-- Como a urna tem tamanho fixo, a ideia aqui é exibir as tabelas com o mesmo tamanho e largura fixa -->
-  <div class="center" id="myDIV" style="display:none;text-align:center;width:600px;margin:auto;">
+  <div class="center" id="myDIV" style="display:none;text-align:center;width:600px;margin:auto;border: 1px solid #FFFFFF">
     <p> <?php 
       include("consultaBanco.php");
     ?> </p>
