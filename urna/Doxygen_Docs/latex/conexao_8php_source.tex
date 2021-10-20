@@ -1,0 +1,65 @@
+\hypertarget{conexao_8php_source}{}\doxysection{conexao.\+php}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00001}00001 <?php}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00005}00005     \textcolor{comment}{// User e senha default do phpmyadmin}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00006}00006     \$servidor = \textcolor{stringliteral}{"{}localhost"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00007}00007     \$usuario = \textcolor{stringliteral}{"{}root"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00008}00008     \$senha = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00009}00009     \$nome\_banco = \textcolor{stringliteral}{"{}urna"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00011}00011     \textcolor{comment}{// Criando a conexao}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00012}00012     \$mysqli = \textcolor{keyword}{new} mysqli(\$servidor, \$usuario, \$senha, \$nome\_banco);}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00014}00014     \textcolor{comment}{// Checando a conexao}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00015}00015     \textcolor{keywordflow}{if} (\$mysqli -\/> connect\_errno) \{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00016}00016         echo \textcolor{stringliteral}{"{}Failed to connect to MySQL: "{}} . \$mysqli -\/> connect\_error;}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00017}00017         exit();}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00018}00018     \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00019}00019     echo \textcolor{stringliteral}{"{}Connected successfully"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00021}00021     \textcolor{comment}{// Iniciamos uma sessão para pegar os valores dos cookies}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00022}00022     session\_start();}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00024}00024     \textcolor{comment}{// Busca o valor na chave do vereador (armazena o numero do candidato que o eleitor digitou) e atualiza no banco o valor dos votos acumulados para aquele número (nulo se não for um número de candidato válido)}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00025}00025     \textcolor{keywordflow}{if}(isset(\$\_COOKIE[\textcolor{stringliteral}{"{}vereador"{}}]))\{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00026}00026         \$numero\_voto = \$\_COOKIE[\textcolor{stringliteral}{"{}vereador"{}}];}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00027}00027         \textcolor{comment}{// A ideia aqui é buscar a quantidade de votos acumulados no banco, somar 1 e atualizar com o novo valor}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00028}00028         \$query\_busca = \textcolor{stringliteral}{"{}SELECT VOTOS\_ACUMULADOS FROM `vereador` WHERE NUMERO\_URNA = \$numero\_voto"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00029}00029         \$resultado = \$mysqli -\/> query(\$query\_busca);}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00030}00030         \$tourresult = \$resultado-\/>fetch\_array()[0] ?? \textcolor{stringliteral}{''};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00031}00031         \$tourresult += 1;}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00032}00032         \$query\_insert = \textcolor{stringliteral}{"{}UPDATE `vereador` SET VOTOS\_ACUMULADOS=\$tourresult WHERE NUMERO\_URNA = \$numero\_voto"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00033}00033         \textcolor{keywordflow}{if}((\$atualiza = \$mysqli -\/> query(\$query\_insert))===TRUE)\{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00034}00034             echo \textcolor{stringliteral}{"{}<br>voto registrado"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00035}00035         \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00036}00036         \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00037}00037             echo \textcolor{stringliteral}{"{}erro ao registrar o voto"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00038}00038         \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00039}00039     \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00041}00041     \textcolor{comment}{// Faz o mesmo acima, mas no registro de voto para prefeito}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00042}00042     \textcolor{keywordflow}{if}(isset(\$\_COOKIE[\textcolor{stringliteral}{"{}prefeito"{}}]))\{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00043}00043         \$numero\_voto = \$\_COOKIE[\textcolor{stringliteral}{"{}prefeito"{}}];}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00044}00044         \$query\_busca = \textcolor{stringliteral}{"{}SELECT VOTOS\_ACUMULADOS FROM `prefeito` WHERE NUMERO\_URNA = \$numero\_voto"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00045}00045         \$resultado = \$mysqli -\/> query(\$query\_busca);}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00046}00046         \$tourresult = \$resultado-\/>fetch\_array()[0] ?? \textcolor{stringliteral}{''};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00047}00047         \$tourresult += 1;}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00048}00048         \$query\_insert = \textcolor{stringliteral}{"{}UPDATE `prefeito` SET VOTOS\_ACUMULADOS=\$tourresult WHERE NUMERO\_URNA = \$numero\_voto"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00049}00049         \textcolor{keywordflow}{if}((\$atualiza = \$mysqli -\/> query(\$query\_insert))===TRUE)\{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00050}00050             echo \textcolor{stringliteral}{"{}<br>voto registrado"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00051}00051         \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00052}00052         \textcolor{keywordflow}{else}\{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00053}00053             echo \textcolor{stringliteral}{"{}erro ao registrar o voto"{}};}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00054}00054         \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00055}00055     \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00057}00057     \textcolor{comment}{// Expira todos os cookies da página para realizar a execução seguinte(mesmo considerando que estamos apenas atualizando valores de cookies para as mesmas chaves 'vereador' e 'prefeito')}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00058}00058     \$past = time() -\/ 3600;}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00059}00059     \textcolor{keywordflow}{foreach} ( \$\_COOKIE as \$key => \$value )}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00060}00060     \{}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00061}00061         setcookie( \$key, \$value, \$past, \textcolor{charliteral}{'/'} );}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00062}00062     \}}
+\DoxyCodeLine{\Hypertarget{conexao_8php_source_l00063}00063   ?>}
+
+\end{DoxyCode}
