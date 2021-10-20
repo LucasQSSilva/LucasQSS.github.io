@@ -1,0 +1,64 @@
+\hypertarget{conexao_8php}{}\doxysection{conexao.\+php File Reference}
+\label{conexao_8php}\index{conexao.php@{conexao.php}}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{conexao_8php_a4df9ffcff3f83295ac7853191d8bb12c}{\$servidor}} = \char`\"{}localhost\char`\"{}
+\item 
+\mbox{\hyperlink{conexao_8php_a559c8003f481610caf373b85cc607fb6}{\$usuario}} = \char`\"{}root\char`\"{}
+\item 
+\mbox{\hyperlink{conexao_8php_a3678c8769c9698fd30581c1016c5f475}{\$senha}} = \char`\"{}\char`\"{}
+\item 
+\mbox{\hyperlink{conexao_8php_ae046e5c50d3a448e84f392ef25d92230}{\$nome\+\_\+banco}} = \char`\"{}urna\char`\"{}
+\item 
+\mbox{\hyperlink{conexao_8php_a580989e8e3521433691a0351287f6315}{\$mysqli}} = new mysqli(\$servidor, \$usuario, \$senha, \$nome\+\_\+banco)
+\item 
+\mbox{\hyperlink{conexao_8php_adda089af982b456a10e7fffd5d051e00}{if}} ( \$mysqli -\/$>$ connect\+\_\+errno)
+\item 
+\mbox{\hyperlink{conexao_8php_adda089af982b456a10e7fffd5d051e00}{if}}(isset( \$\+\_\+\+COOKIE\mbox{[}\char`\"{}vereador\char`\"{}\mbox{]})) if(isset(\$\+\_\+\+COOKIE\mbox{[}\char`\"{}prefeito\char`\"{}\mbox{]})) \mbox{\hyperlink{conexao_8php_a94d8da66d7aa78207130ff2af2fbc0e1}{\$past}} = time() -\/ 3600
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{conexao_8php_a580989e8e3521433691a0351287f6315}\label{conexao_8php_a580989e8e3521433691a0351287f6315}} 
+\index{conexao.php@{conexao.php}!\$mysqli@{\$mysqli}}
+\index{\$mysqli@{\$mysqli}!conexao.php@{conexao.php}}
+\doxysubsubsection{\texorpdfstring{\$mysqli}{$mysqli}}
+{\footnotesize\ttfamily \$mysqli = new mysqli(\$servidor, \$usuario, \$senha, \$nome\+\_\+banco)}
+
+\mbox{\Hypertarget{conexao_8php_ae046e5c50d3a448e84f392ef25d92230}\label{conexao_8php_ae046e5c50d3a448e84f392ef25d92230}} 
+\index{conexao.php@{conexao.php}!\$nome\_banco@{\$nome\_banco}}
+\index{\$nome\_banco@{\$nome\_banco}!conexao.php@{conexao.php}}
+\doxysubsubsection{\texorpdfstring{\$nome\_banco}{$nome\_banco}}
+{\footnotesize\ttfamily \$nome\+\_\+banco = \char`\"{}urna\char`\"{}}
+
+\mbox{\Hypertarget{conexao_8php_a94d8da66d7aa78207130ff2af2fbc0e1}\label{conexao_8php_a94d8da66d7aa78207130ff2af2fbc0e1}} 
+\index{conexao.php@{conexao.php}!\$past@{\$past}}
+\index{\$past@{\$past}!conexao.php@{conexao.php}}
+\doxysubsubsection{\texorpdfstring{\$past}{$past}}
+{\footnotesize\ttfamily \mbox{\hyperlink{conexao_8php_adda089af982b456a10e7fffd5d051e00}{if}}(isset(\$\+\_\+\+COOKIE\mbox{[}\char`\"{}vereador\char`\"{}\mbox{]})) if (isset( \$\+\_\+\+COOKIE\mbox{[}\char`\"{}prefeito\char`\"{}\mbox{]})) \$past = time() -\/ 3600}
+
+Busca a chave do vereador e atualiza no banco o valor dos votos acumulados para aquele número (nulo se não for um número de candidato válido) Faz o mesmo acima, mas na tabela do prefeito \mbox{\Hypertarget{conexao_8php_a3678c8769c9698fd30581c1016c5f475}\label{conexao_8php_a3678c8769c9698fd30581c1016c5f475}} 
+\index{conexao.php@{conexao.php}!\$senha@{\$senha}}
+\index{\$senha@{\$senha}!conexao.php@{conexao.php}}
+\doxysubsubsection{\texorpdfstring{\$senha}{$senha}}
+{\footnotesize\ttfamily \$senha = \char`\"{}\char`\"{}}
+
+\mbox{\Hypertarget{conexao_8php_a4df9ffcff3f83295ac7853191d8bb12c}\label{conexao_8php_a4df9ffcff3f83295ac7853191d8bb12c}} 
+\index{conexao.php@{conexao.php}!\$servidor@{\$servidor}}
+\index{\$servidor@{\$servidor}!conexao.php@{conexao.php}}
+\doxysubsubsection{\texorpdfstring{\$servidor}{$servidor}}
+{\footnotesize\ttfamily \$servidor = \char`\"{}localhost\char`\"{}}
+
+Criamos nossa conexão dado um usuário (nesse caso o root) \mbox{\Hypertarget{conexao_8php_a559c8003f481610caf373b85cc607fb6}\label{conexao_8php_a559c8003f481610caf373b85cc607fb6}} 
+\index{conexao.php@{conexao.php}!\$usuario@{\$usuario}}
+\index{\$usuario@{\$usuario}!conexao.php@{conexao.php}}
+\doxysubsubsection{\texorpdfstring{\$usuario}{$usuario}}
+{\footnotesize\ttfamily \$usuario = \char`\"{}root\char`\"{}}
+
+\mbox{\Hypertarget{conexao_8php_adda089af982b456a10e7fffd5d051e00}\label{conexao_8php_adda089af982b456a10e7fffd5d051e00}} 
+\index{conexao.php@{conexao.php}!if@{if}}
+\index{if@{if}!conexao.php@{conexao.php}}
+\doxysubsubsection{\texorpdfstring{if}{if}}
+{\footnotesize\ttfamily if(\$mysqli -\/$>$ connect\+\_\+errno) (\begin{DoxyParamCaption}\item[{}]{\$mysqli -\/$>$ }\end{DoxyParamCaption})}
+
